@@ -7,23 +7,23 @@ export default function RootLayout() {
     <View style={styles.container}>
       <Stack
         screenOptions={{
-          headerShown: false,           // ukrywa górny pasek na większości ekranów
+          headerShown: false,                    // ukrywa górny pasek
           contentStyle: { backgroundColor: "#FFFFFF" },
         }}
       >
-        {/* Główna nawigacja z tabami na dole */}
+        {/* <<< TO JEST NAJWAŻNIEJSZE - tabsy na dole >>> */}
         <Stack.Screen 
           name="(tabs)" 
           options={{ headerShown: false }} 
         />
 
-        {/* Dodatkowe ekrany poza tabami */}
+        {/* Dodatkowe ekrany */}
         <Stack.Screen name="workout" options={{ headerShown: false }} />
         <Stack.Screen name="exercise/[id]" options={{ presentation: "card" }} />
         <Stack.Screen name="workout-detail/[id]" options={{ presentation: "card" }} />
         <Stack.Screen name="routine-builder" options={{ presentation: "modal" }} />
         <Stack.Screen name="settings" options={{ presentation: "modal" }} />
-        <Stack.Screen name="create-exercise" options={{ presentation: "modal" }} />
+        <Stack.Screen name="profile" options={{ presentation: "modal" }} />
       </Stack>
       <StatusBar style="dark" />
     </View>
