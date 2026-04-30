@@ -1,38 +1,69 @@
-import { Stack } from "expo-router";
-import { StatusBar } from "expo-status-bar";
-import { View, StyleSheet } from "react-native";
+import { Tabs } from "expo-router";
+import { Home, Layers, Brain, User } from "lucide-react-native";
+import { StyleSheet } from "react-native";
+import Colors from "@/constants/colors";
 
-export default function RootLayout() {
+const C = Colors.light;
+
+export default function TabLayout() {
   return (
-    <View style={styles.container}>
-      <Stack
-        screenOptions={{
-          headerShown: false,                    // ukrywa górny pasek
-          contentStyle: { backgroundColor: "#FFFFFF" },
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: C.tint,
+        tabBarInactiveTintColor: C.tabIconDefault,
+        headerShown: false,
+        tabBarStyle: styles.tabBar,
+        tabBarLabelStyle: styles.tabBarLabel,
+      }}
+    >
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: "Home",
+          tabBarIcon: ({ color }) => <Home size={22} color={color} />,
         }}
-      >
-        {/* <<< TO JEST NAJWAŻNIEJSZE - tabsy na dole >>> */}
-        <Stack.Screen 
-          name="(tabs)" 
-          options={{ headerShown: false }} 
-        />
-
-        {/* Dodatkowe ekrany */}
-        <Stack.Screen name="workout" options={{ headerShown: false }} />
-        <Stack.Screen name="exercise/[id]" options={{ presentation: "card" }} />
-        <Stack.Screen name="workout-detail/[id]" options={{ presentation: "card" }} />
-        <Stack.Screen name="routine-builder" options={{ presentation: "modal" }} />
-        <Stack.Screen name="settings" options={{ presentation: "modal" }} />
-        <Stack.Screen name="profile" options={{ presentation: "modal" }} />
-      </Stack>
-      <StatusBar style="dark" />
-    </View>
+      />
+      <Tabs.Screen
+        name="workout"
+        options={{
+          href: null,
+        }}
+      />
+      <Tabs.Screen
+        name="coach"
+        options={{
+          title: "Coach",
+          tabBarIcon: ({ color }) => <Brain size={22} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profile",
+          tabBarIcon: ({ color }) => <User size={22} color={color} />,
+        }}
+      />
+      <Tabs.Screen
+        name="mesocycles"
+        options={{
+          title: "Mesocycles",
+          tabBarIcon: ({ color }) => <Layers size={22} color={color} />,
+        }}
+      />
+    </Tabs>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFFFFF",
+  tabBar: {
+    backgroundColor: C.white,
+    borderTopColor: C.border,
+    borderTopWidth: 1,
+    elevation: 0,
+    shadowOpacity: 0,
+  },
+  tabBarLabel: {
+    fontSize: 10,
+    fontWeight: "600" as const,
   },
 });
